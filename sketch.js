@@ -14,8 +14,9 @@ let confidence = 0.0;
 let yOff = 0;
 let defaultWeight = 270;
 let lerpRate = 0.4;
+let l;
+let p;
 let madeClone = false;
-let lerpLandmarks;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -28,62 +29,53 @@ function draw() {
 
   if (landmarks.length > 0) {
     if (!madeClone) {
-      lerpLandmarks = JSON.parse(JSON.stringify(landmarks));
+      l = JSON.parse(JSON.stringify(landmarks[0]));
       madeClone = true;
     }
-    landmarks.forEach((person, index) => {
-      makeBezier({
-        index: index,
-        start: 8,
-        cont1: 5,
-        cont2: 2,
-        end: 7,
-      });
-      makeBezier({
-        index: index,
-        start: 8,
-        cont1: 12,
-        cont2: 14,
-        end: 16,
-      });
+    makeBezier({
+      start: 8,
+      cont1: 5,
+      cont2: 2,
+      end: 7,
+    });
+    makeBezier({
+      start: 8,
+      cont1: 12,
+      cont2: 14,
+      end: 16,
+    });
 
-      makeBezier({
-        index: index,
-        start: 7,
-        cont1: 11,
-        cont2: 13,
-        end: 15,
-      });
+    makeBezier({
+      start: 7,
+      cont1: 11,
+      cont2: 13,
+      end: 15,
+    });
 
-      makeBezier({
-        index: index,
-        start: 16,
-        cont1: 24,
-        cont2: 26,
-        end: 28,
-      });
+    makeBezier({
+      start: 16,
+      cont1: 24,
+      cont2: 26,
+      end: 28,
+    });
 
-      makeBezier({
-        index: index,
-        start: 15,
-        cont1: 23,
-        cont2: 25,
-        end: 27,
-      });
+    makeBezier({
+      start: 15,
+      cont1: 23,
+      cont2: 25,
+      end: 27,
+    });
 
-      makeBezier({
-        index: index,
-        start: 27,
-        cont1: 25,
-        cont2: 26,
-        end: 28,
-      });
+    makeBezier({
+      start: 27,
+      cont1: 25,
+      cont2: 26,
+      end: 28,
     });
   }
 }
 
 function makeBezier({
-  index,
   start,
   cont1,
   cont2,
@@ -106,8 +98,7 @@ function makeBezier({
 
   strokeWeight(weight);
 
-  let p = landmarks[index];
-  let l = lerpLandmarks[index];
+  let p = landmarks[0];
   l[start].x = simpLerp(l[start].x, p[start].x, lerpRate);
   l[start].y = simpLerp(l[start].y, p[start].y, lerpRate);
   l[cont1].x = simpLerp(l[cont1].x, p[cont1].x, lerpRate);
